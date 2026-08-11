@@ -164,6 +164,12 @@ select-stat/
 - 飞书桌面客户端（Electron，不暴露选区给 macOS AX）
 - 小红书桌面客户端（CEF 内核，同上）
 - 任何包含密码框 / DRM 保护内容的场景
+- **Quick Look 预览**（空格预览，默认不暴露文本选择）
+
+**意外能用（实测覆盖）**
+
+- **Typora**（许用 Electron 但装了 AX 集成）
+- **VSCode**（部分场景可以用，看具体配置）
 
 **判定依据**：项目用 macOS Accessibility API 读 selection，但只有宿主 App 主动暴露选区给系统时才能读到。这是 App 本身的实现限制，不是我们的项目能修的。
 
