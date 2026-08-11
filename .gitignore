@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Swift / SwiftPM 编译产物
+.build/
+.swiftpm/
+Packages/
+
+# build_and_run.sh 产出的 .app bundle（可重新构建）
+build/
+
+# Xcode 用户数据（不应进入版本控制）
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# 编辑器临时文件
+*.swp
+*.swo
+
+# IDE 配置
+.vscode/
+.idea/
