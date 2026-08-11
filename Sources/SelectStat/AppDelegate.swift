@@ -52,14 +52,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Permission
 
     private func checkAccessibilityAndPrompt() {
-        // 静默检查，不主动召唤系统授权弹窗
-        // （避免每次 build 后都弹一次）
+        // 如果已授权，直接返回
         if AXIsProcessTrustedWithOptions(nil) {
-            return  // 已授权
+            return
         }
-        print("[SelectStat] ⚠️  尚未获得辅助功能权限。")
-        print("[SelectStat]    请手动到 系统设置 → 隐私与安全性 → 辅助功能 中授权 SelectStat")
-        print("[SelectStat]    或点菜单栏「字数」→「授权辅助功能…」")
+        // 未授权：主动召唤系统授权面板
+        // 好处是不需要人去手动加文件；坏处是一次验证取消后每次启动都会再弹一次（因为没记住）
+        print("[SelectStat] ⚠️  尚未获得辅助功能权限，下面调出系统授权面板。")
+        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+        _ = AXIsProcessTrustedWithOptions(options)
     }
 
     @objc private func openAccessibilitySettings() {
